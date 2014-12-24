@@ -23,6 +23,8 @@ public class Encryption {
 	
 	private ArrayList<byte[]> listKeys = new ArrayList<>();
 	private ArrayList<Person> listUsers = new ArrayList<>();
+	
+	private boolean addUserAvaliable = true;
 
 	private static Person PA;
 	private static Person PB;
@@ -67,13 +69,25 @@ public class Encryption {
 		return g;
 	}
 	
+	public byte[] syncManager(byte[] g){
+		// synchronous
+		if (!addUserAvaliable) {
+			for (int i = 0; i < listUsers.size(); i++) {
+				g = Util.concat(g, listKeys.get(i));
+			}
+		}
+		return g;
+	}
+	
 	public byte[] addNewUser(byte[] g) throws Exception{
-		byte[] key = null;
-		while (key == null)
-			key = updatePerson(++maxUser);
-		setPC(PX);
-		listKeys.add(key);
-		listUsers.add(PX);
+		if (addUserAvaliable) {
+			byte[] key = null;
+			while (key == null)
+				key = updatePerson(++maxUser);
+			setPC(PX);
+			listKeys.add(key);
+			listUsers.add(PX);
+		}
 		return g;
 	}
 
@@ -104,6 +118,14 @@ public class Encryption {
 		else {
 			return true;
 		}
+	}
+	
+	public void setKey(String k) {
+		key = k;
+	}
+	
+	public void setAddNewUserAvaliable(boolean b) {
+		addUserAvaliable = b;
 	}
 
 	/**
@@ -183,6 +205,14 @@ public class Encryption {
 	 */
 	public static void setPX(Person pX) {
 		PX = pX;
+	}
+	
+	public ArrayList<byte[]> getListKeys(){
+		return listKeys;
+	}
+	
+	public ArrayList<Person> getListUsers(){
+		return listUsers;
 	}
 
 }

@@ -2,8 +2,6 @@ package UtilCipher;
 
 import java.io.UnsupportedEncodingException;
 
-import SHA3.Util;
-
 /**
  * Printer.java
  * TODO: 
