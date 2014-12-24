@@ -2,7 +2,6 @@ package AES;
 
 import java.io.UnsupportedEncodingException;
 
-import SHA3.Util;
 import UtilCipher.CBCBlockCipher;
 import UtilCipher.InvalidCipherTextException;
 import UtilCipher.Printer;
